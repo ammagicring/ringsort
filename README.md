@@ -16,7 +16,7 @@
 ### From source (recommended)
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/ammagicring/ringsort
 cd RingSort
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
