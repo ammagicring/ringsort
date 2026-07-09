@@ -3,7 +3,7 @@
 > A fast and cross-platform Python CLI tool for automatically organizing files into categorized folders.
 
 
-\
+
 
 RingSort helps you clean messy directories by automatically sorting files into organized folders based on their extensions.
 
