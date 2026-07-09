@@ -21,3 +21,6 @@ env/
 Thumbs.db
 .idea/
 .vscode/
+*.log
+htmlcov/
+.coverage.*

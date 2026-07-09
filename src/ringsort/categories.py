@@ -6,7 +6,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
 
-
 CategoryName = str
 
 
@@ -21,15 +20,40 @@ class Category:
 CATEGORIES: Final[tuple[Category, ...]] = (
     Category(
         name="Images",
-        extensions=frozenset({".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp"}),
+        extensions=frozenset(
+            {".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".svg"}
+        ),
     ),
-    Category(name="Videos", extensions=frozenset({".mp4", ".mkv", ".mov", ".avi", ".wmv"})),
-    Category(name="Music", extensions=frozenset({".mp3", ".wav", ".flac", ".aac", ".m4a"})),
+    Category(
+        name="Videos",
+        extensions=frozenset({".mp4", ".mkv", ".mov", ".avi", ".wmv", ".webm"}),
+    ),
+    Category(
+        name="Music",
+        extensions=frozenset({".mp3", ".wav", ".flac", ".aac", ".m4a", ".ogg"}),
+    ),
     Category(
         name="Documents",
-        extensions=frozenset({".pdf", ".doc", ".docx", ".txt", ".md", ".rtf", ".ppt", ".pptx", ".xls", ".xlsx"}),
+        extensions=frozenset(
+            {
+                ".pdf",
+                ".doc",
+                ".docx",
+                ".txt",
+                ".md",
+                ".rtf",
+                ".ppt",
+                ".pptx",
+                ".xls",
+                ".xlsx",
+                ".csv",
+            }
+        ),
     ),
-    Category(name="Archives", extensions=frozenset({".zip", ".rar", ".7z", ".tar", ".gz", ".bz2"})),
+    Category(
+        name="Archives",
+        extensions=frozenset({".zip", ".rar", ".7z", ".tar", ".gz", ".bz2", ".xz"}),
+    ),
     Category(
         name="Code",
         extensions=frozenset(
@@ -67,7 +91,10 @@ CATEGORIES: Final[tuple[Category, ...]] = (
             }
         ),
     ),
-    Category(name="Executables", extensions=frozenset({".exe", ".msi", ".app", ".dmg", ".deb", ".rpm"})),
+    Category(
+        name="Executables",
+        extensions=frozenset({".exe", ".msi", ".app", ".dmg", ".deb", ".rpm"}),
+    ),
 )
 
 
@@ -80,9 +107,8 @@ def categorize_path(path: Path) -> CategoryName:
     Returns:
         Category folder name.
     """
-    ext = path.suffix.lower()
+    extension = path.suffix.lower()
     for category in CATEGORIES:
-        if ext in category.extensions:
+        if extension in category.extensions:
             return category.name
     return "Others"
-
