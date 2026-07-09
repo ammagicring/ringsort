@@ -1,0 +1,5 @@
+# Runtime dependencies
+
+# Dev/test dependencies (optional)
+pytest>=8.0
+pytest-cov>=5.0
