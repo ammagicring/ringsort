@@ -1,13 +1,15 @@
 # RingSort
 
-[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Tests](https://github.com/ammagicring/ringsort/actions/workflows/tests.yml/badge.svg)](https://github.com/ammagicring/ringsort/actions/workflows/tests.yml)
-[![Coverage](https://img.shields.io/badge/coverage-%E2%89%A580%25-brightgreen.svg)](https://github.com/ammagicring/ringsort)
+> A fast and cross-platform Python CLI tool for automatically organizing files into categorized folders.
 
-RingSort is a cross-platform Python CLI that organizes files inside a directory by moving them into folders based on file extensions.
 
-Turn a messy folder like this:
+\
+
+RingSort helps you clean messy directories by automatically sorting files into organized folders based on their extensions.
+
+## Example
+
+Turn this:
 
 ```text
 Downloads/
@@ -21,23 +23,35 @@ Into this:
 
 ```text
 Downloads/
-├── Images/photo.jpg
-├── Documents/report.pdf
-├── Videos/movie.mp4
-└── Music/music.mp3
+├── Images/
+│   └── photo.jpg
+├── Documents/
+│   └── report.pdf
+├── Videos/
+│   └── movie.mp4
+└── Music/
+    └── music.mp3
 ```
+
+---
 
 ## Features
 
-- Simple CLI: `ringsort ~/Downloads`
-- Extension-based categorization into Images, Videos, Music, Documents, Archives, Code, Executables, and Others
-- Dry run preview with `--dry-run`
-- Recursive sorting with `--recursive`
-- Hash-based duplicate detection
-- Safe renaming for filename conflicts (never silently overwrites files)
-- Graceful handling of permission errors
-- Optional verbose logging and log file output
-- Cross-platform support for Windows, Linux, and macOS
+* 📁 Automatic file organization
+* 🖼 Categorization of Images, Videos, Music, Documents, Archives, Code, Executables, and Others
+* 👀 Dry-run mode to preview changes before execution
+* 🔄 Recursive directory scanning
+* 🔍 Hash-based duplicate detection
+* 🔒 Safe filename conflict handling without silent overwrites
+* 📝 Optional verbose logging and log file output
+* ⚡ Fast and lightweight CLI experience
+* 💻 Cross-platform support:
+
+  * Windows
+  * Linux
+  * macOS
+
+---
 
 ## Installation
 
@@ -47,24 +61,48 @@ Downloads/
 pip install ringsort
 ```
 
-### From source
+Upgrade:
 
 ```bash
-git clone https://github.com/ammagicring/ringsort
+pip install --upgrade ringsort
+```
+
+### From Source
+
+```bash
+git clone https://github.com/ammagicring/ringsort.git
+
 cd ringsort
+
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+```
+
+Activate environment:
+
+Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+Linux/macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+Install:
+
+```bash
 pip install -U pip
 pip install -e .
 ```
 
-### Development setup
-
-```bash
-pip install -e ".[dev]"
-```
+---
 
 ## Quick Start
+
+Organize a directory:
 
 ```bash
 ringsort ~/Downloads
@@ -80,40 +118,70 @@ Example output:
 ✓ Done in 0.42 seconds
 ```
 
+---
+
 ## Usage
+
+Basic:
 
 ```bash
 ringsort PATH
+```
+
+Dry run:
+
+```bash
 ringsort PATH --dry-run
+```
+
+Recursive sorting:
+
+```bash
 ringsort PATH --recursive
+```
+
+Verbose mode:
+
+```bash
 ringsort PATH --verbose
+```
+
+Save logs:
+
+```bash
 ringsort PATH --log-file ringsort.log
+```
+
+Help:
+
+```bash
 ringsort --help
 ```
 
-### Dry run
+---
 
-Preview planned operations without changing the filesystem:
+## Dry Run
+
+Preview planned operations without modifying files:
 
 ```bash
 ringsort ~/Downloads --dry-run
 ```
 
-Example output:
+Example:
 
 ```text
 [DRY RUN]
+
 movie.mp4 -> Videos/
 image.png -> Images/
 document.pdf -> Documents/
 
 ✓ 3 files scanned
-✓ 1 Videos
-✓ 1 Images
-✓ 1 Documents
 ✓ Dry run complete (no files moved)
-✓ Done in 0.05 seconds
 ```
+
+---
 
 ## Project Structure
 
@@ -143,27 +211,61 @@ ringsort/
 └── requirements.txt
 ```
 
+---
+
 ## Development
 
-Run the quality checks locally:
+Install development dependencies:
+
+```bash
+pip install -e ".[dev]"
+```
+
+Run quality checks:
 
 ```bash
 ruff check src tests
+```
+
+```bash
 mypy
+```
+
+```bash
 pytest
 ```
 
+---
+
 ## Roadmap
 
-- v1.1: configurable category mappings
-- v1.2: undo support via transaction log
-- v1.3: watch mode for automatic sorting
-- v2.0: plugin-based rules engine
+* [x] v1.0.0 Initial release
+* [ ] v1.1 Configurable category mappings
+* [ ] v1.2 Undo support via transaction log
+* [ ] v1.3 Watch mode for automatic sorting
+* [ ] v2.0 Plugin-based rules engine
+
+---
 
 ## Contributing
 
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+Contributions are welcome!
+
+Please read `CONTRIBUTING.md` before opening a pull request.
+
+---
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+This project is licensed under the MIT License.
+
+See LICENSE.
+
+---
+
+## Author
+
+Created by **Amir Mohammad Mohammadi**
+
+GitHub:
+https://github.com/ammagicring
