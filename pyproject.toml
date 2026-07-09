@@ -3,43 +3,86 @@ requires = ["setuptools>=70", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "RingSort"
+name = "ringsort"
 version = "1.0.0"
-description = "RingSort: cross-platform CLI to organize files into folders by extension."
+description = "Organize files into folders based on their extensions."
 readme = "README.md"
-requires-python = ">=3.12"
-license = { file = "LICENSE" }
+requires-python = ">=3.10"
+license = { text = "MIT" }
 authors = [{ name = "Open Source Contributors" }]
-keywords = ["cli", "organizer", "files", "pathlib"]
+maintainers = [{ name = "Open Source Contributors" }]
+keywords = ["cli", "files", "organizer", "sort", "pathlib"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
   "Intended Audience :: End Users/Desktop",
   "License :: OSI Approved :: MIT License",
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3.13",
   "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: System :: Filesystems",
+  "Topic :: Utilities",
 ]
 dependencies = []
 
+[project.urls]
+Homepage = "https://github.com/ammagicring/ringsort"
+Repository = "https://github.com/ammagicring/ringsort"
+Issues = "https://github.com/ammagicring/ringsort/issues"
+Documentation = "https://github.com/ammagicring/ringsort#readme"
+Changelog = "https://github.com/ammagicring/ringsort/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
-dev = ["pytest>=8.0", "pytest-cov>=5.0"]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "ruff>=0.6",
+  "mypy>=1.11",
+]
 
 [project.scripts]
-organizer = "organizer.main:main"
+ringsort = "ringsort.cli:cli"
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-q"
+addopts = "--cov=ringsort --cov-report=term-missing --cov-fail-under=80"
+pythonpath = ["src"]
+
+[tool.coverage.run]
+branch = true
+source = ["ringsort"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "if __name__ == .__main__.:",
+  "raise SystemExit",
+]
 
 [tool.ruff]
 line-length = 88
+target-version = "py310"
+src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unreachable = true
+warn_unused_ignores = true
+mypy_path = "src"
+packages = ["ringsort"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false

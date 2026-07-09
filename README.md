@@ -1,48 +1,78 @@
 # RingSort
 
-`RingSort` is a cross-platform Python CLI that organizes files inside a directory by moving them into folders based on file extensions.
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Tests](https://github.com/ammagicring/ringsort/actions/workflows/tests.yml/badge.svg)](https://github.com/ammagicring/ringsort/actions/workflows/tests.yml)
+[![Coverage](https://img.shields.io/badge/coverage-%E2%89%A580%25-brightgreen.svg)](https://github.com/ammagicring/ringsort)
 
-## Features (v1.0)
+RingSort is a cross-platform Python CLI that organizes files inside a directory by moving them into folders based on file extensions.
 
-- Organize files by extension into categories (Images, Videos, Music, Documents, Archives, Code, Executables, Others)
-- Ignore directories (only files are moved)
-- Automatically create destination folders
-- Safe handling of duplicate filenames
-- Graceful handling of permission errors (continues organizing)
-- Cross-platform: Windows, Linux, macOS
+Turn a messy folder like this:
+
+```text
+Downloads/
+├── photo.jpg
+├── report.pdf
+├── movie.mp4
+└── music.mp3
+```
+
+Into this:
+
+```text
+Downloads/
+├── Images/photo.jpg
+├── Documents/report.pdf
+├── Videos/movie.mp4
+└── Music/music.mp3
+```
+
+## Features
+
+- Simple CLI: `ringsort ~/Downloads`
+- Extension-based categorization into Images, Videos, Music, Documents, Archives, Code, Executables, and Others
+- Dry run preview with `--dry-run`
+- Recursive sorting with `--recursive`
+- Hash-based duplicate detection
+- Safe renaming for filename conflicts (never silently overwrites files)
+- Graceful handling of permission errors
+- Optional verbose logging and log file output
+- Cross-platform support for Windows, Linux, and macOS
 
 ## Installation
 
-### From source (recommended)
+### From PyPI
+
+```bash
+pip install ringsort
+```
+
+### From source
 
 ```bash
 git clone https://github.com/ammagicring/ringsort
-cd RingSort
+cd ringsort
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -U pip
 pip install -e .
 ```
 
-### Install test dependencies
+### Development setup
 
 ```bash
 pip install -e ".[dev]"
 ```
 
-## Usage
-
-The installed command is `organizer`.
-
-### Organize a directory
+## Quick Start
 
 ```bash
-organizer organize ~/Downloads
+ringsort ~/Downloads
 ```
 
 Example output:
 
-```
+```text
 ✓ 15 files scanned
 ✓ 4 Images
 ✓ 2 Documents
@@ -50,48 +80,90 @@ Example output:
 ✓ Done in 0.42 seconds
 ```
 
-### Dry run (no moves)
+## Usage
 
 ```bash
-organizer organize ~/Downloads --dry-run
+ringsort PATH
+ringsort PATH --dry-run
+ringsort PATH --recursive
+ringsort PATH --verbose
+ringsort PATH --log-file ringsort.log
+ringsort --help
+```
+
+### Dry run
+
+Preview planned operations without changing the filesystem:
+
+```bash
+ringsort ~/Downloads --dry-run
+```
+
+Example output:
+
+```text
+[DRY RUN]
+movie.mp4 -> Videos/
+image.png -> Images/
+document.pdf -> Documents/
+
+✓ 3 files scanned
+✓ 1 Videos
+✓ 1 Images
+✓ 1 Documents
+✓ Dry run complete (no files moved)
+✓ Done in 0.05 seconds
 ```
 
 ## Project Structure
 
-```
-RingSort/
+```text
+ringsort/
 ├── src/
-│   └── organizer/
+│   └── ringsort/
 │       ├── __init__.py
-│       ├── main.py
+│       ├── cli.py
 │       ├── scanner.py
 │       ├── mover.py
-│       ├── categories.py
+│       ├── duplicates.py
+│       ├── config.py
 │       ├── logger.py
-│       └── utils.py
+│       └── categories.py
 ├── tests/
+├── docs/
+├── examples/
+├── .github/workflows/
 ├── README.md
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
+├── SECURITY.md
 ├── LICENSE
 ├── pyproject.toml
-├── .gitignore
 └── requirements.txt
 ```
 
 ## Development
 
-Run tests:
+Run the quality checks locally:
 
 ```bash
+ruff check src tests
+mypy
 pytest
 ```
 
 ## Roadmap
 
-- v1.1: optional recursive mode
-- v1.2: configurable category mappings via config file
-- v1.3: `--undo` support (transaction log)
-- v2.0: plug-in categories and rules engine
+- v1.1: configurable category mappings
+- v1.2: undo support via transaction log
+- v1.3: watch mode for automatic sorting
+- v2.0: plugin-based rules engine
+
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## License
 
-MIT. See `LICENSE`.
+MIT. See [LICENSE](LICENSE).
