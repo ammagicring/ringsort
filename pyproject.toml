@@ -2,18 +2,35 @@
 requires = ["setuptools>=70", "wheel"]
 build-backend = "setuptools.build_meta"
 
+
 [project]
 name = "ringsort"
 version = "1.0.0"
-description = "Organize files into folders based on their extensions."
+description = "A fast and cross-platform CLI tool for automatically organizing files into categorized folders."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
-authors = [{ name = "Open Source Contributors" }]
-maintainers = [{ name = "Open Source Contributors" }]
-keywords = ["cli", "files", "organizer", "sort", "pathlib"]
+
+license = { file = "LICENSE" }
+
+authors = [
+  { name = "Amir Mohammad Mohammadi" }
+]
+
+maintainers = [
+  { name = "Amir Mohammad Mohammadi" }
+]
+
+keywords = [
+  "cli",
+  "file-organizer",
+  "automation",
+  "filesystem",
+  "productivity",
+  "python"
+]
+
 classifiers = [
-  "Development Status :: 5 - Production/Stable",
+  "Development Status :: 4 - Beta",
   "Environment :: Console",
   "Intended Audience :: End Users/Desktop",
   "License :: OSI Approved :: MIT License",
@@ -25,7 +42,9 @@ classifiers = [
   "Topic :: System :: Filesystems",
   "Topic :: Utilities",
 ]
+
 dependencies = []
+
 
 [project.urls]
 Homepage = "https://github.com/ammagicring/ringsort"
@@ -33,6 +52,7 @@ Repository = "https://github.com/ammagicring/ringsort"
 Issues = "https://github.com/ammagicring/ringsort/issues"
 Documentation = "https://github.com/ammagicring/ringsort#readme"
 Changelog = "https://github.com/ammagicring/ringsort/blob/main/CHANGELOG.md"
+
 
 [project.optional-dependencies]
 dev = [
@@ -42,23 +62,29 @@ dev = [
   "mypy>=1.11",
 ]
 
+
 [project.scripts]
 ringsort = "ringsort.cli:cli"
+
 
 [tool.setuptools]
 package-dir = { "" = "src" }
 
+
 [tool.setuptools.packages.find]
 where = ["src"]
+
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--cov=ringsort --cov-report=term-missing --cov-fail-under=80"
 pythonpath = ["src"]
 
+
 [tool.coverage.run]
 branch = true
 source = ["ringsort"]
+
 
 [tool.coverage.report]
 exclude_lines = [
@@ -67,13 +93,23 @@ exclude_lines = [
   "raise SystemExit",
 ]
 
+
 [tool.ruff]
 line-length = 88
 target-version = "py310"
 src = ["src", "tests"]
 
+
 [tool.ruff.lint]
-select = ["E", "F", "I", "B", "UP", "SIM"]
+select = [
+  "E",
+  "F",
+  "I",
+  "B",
+  "UP",
+  "SIM"
+]
+
 
 [tool.mypy]
 python_version = "3.10"
@@ -82,6 +118,7 @@ warn_unreachable = true
 warn_unused_ignores = true
 mypy_path = "src"
 packages = ["ringsort"]
+
 
 [[tool.mypy.overrides]]
 module = "tests.*"
